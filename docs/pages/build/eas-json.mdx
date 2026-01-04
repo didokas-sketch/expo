@@ -74,8 +74,12 @@ You can also configure your development builds to run on the [iOS Simulator](/bu
 ```json eas.json
 {
   "build": {
+    "production": {
+      "autoIncrement": true
+      }
     "development": {
-      "developmentClient": true,
+ "autoIncrement": false
+      }
       "distribution": "internal",
       "ios": {
         "simulator": true
