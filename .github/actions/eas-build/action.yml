@@ -98,3 +98,45 @@ runs:
         EXPO_TOKEN: ${{ inputs.expoToken }}
         EAS_BUILD_PROFILE: ${{ inputs.profile }}
         BUILD_ID: ${{ steps.build_start.outputs.build_id }}
+
+{
+  "cli": {
+    "version": ">= 3.0.0"
+  },
+  "projectId": "REPLACE_WITH_YOUR_PROJECT_UUID",
+  "build": {
+    "production": {
+      "developmentClient": false,
+      "distribution": "store",
+      "credentialsSource": "remote",
+      "ios": {
+        "buildType": "release"
+      }
+    },
+    "preview": {
+      "developmentClient": false,
+      "distribution": "internal",
+      "credentialsSource": "remote",
+      "ios": {
+        "buildType": "release"
+      }
+    },
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "credentialsSource": "local",
+      "ios": {
+        "simulator": false
+      }
+    }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "appleId": "REPLACE_WITH_APPLE_ID@example.com",
+        "ascAppId": "REPLACE_WITH_APP_STORE_CONNECT_APP_ID"
+      }
+    }
+  },
+  "_notes": "Replace placeholders: projectId, appleId, ascAppId. Do NOT commit secrets or private keys. Use EAS_TOKEN in CI (export EAS_TOKEN=...). Recommended flow: 1) ensure EAS_TOKEN belongs to the robot/account that will run builds; 2) run `EAS_TOKEN=$EAS_TOKEN npx eas-cli whoami` to confirm; 3) run `EAS_TOKEN=$EAS_TOKEN npx eas-cli init` or set projectId from expo.dev; 4) run `EAS_TOKEN=$EAS_TOKEN npx eas-cli build -p ios --profile production --non-interactive` and inspect build logs if it fails."
+
